@@ -10,4 +10,5 @@
 remove_function <- function(basketball_data) {
   basketball_data <- basketball_data %>% 
     select(-V6, -V7)
+  return(basketball_data)
 }

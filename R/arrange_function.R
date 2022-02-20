@@ -9,4 +9,5 @@
 
 arrange_function <- function(basketball_data) {
   basketball_data <- basketball_data %>% arrange((Venue))
+  return(basketball_data)
 }

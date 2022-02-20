@@ -1,0 +1,98 @@
+---
+title: "Basketball Shiny App"
+author: "Akhil Anand"
+date: "2/20/2022"
+output: html_document
+---
+
+```{r setiup, include=F}
+library(shiny)
+```
+
+## Install basketball package
+
+```{r}
+devtools::install("~/MATH-3190/basketballpackage")
+library(basketballpackage)
+```
+
+
+### Final App
+The app has the functions from the basketball package
+```{r, final app, eval=F, echo=T}
+ui <- fluidPage(
+  
+  # Put a titlePanel here
+  titlePanel("Basketball Package"),
+  
+  # Read in the basketball dataset
+  mainPanel(
+    textOutput("heading"),
+    tableOutput('basketball_data'),
+    textOutput("mutate"),
+    tableOutput('mutate_function'),
+    textOutput("arrange"),
+    tableOutput('arrange_function'),
+    textOutput("select"),
+    tableOutput('select_function'),
+    textOutput("filter"),
+    tableOutput('filter_function'),
+    textOutput("SUU"),
+    tableOutput('SUU_function'),
+  )
+)
+
+server <- function(input, output, session) {
+    basketball_data <- as_tibble(
+        read.fwf(
+          'http://kenpom.com/cbbga22.txt', 
+          widths=c(11,24,3,23,4,4,21), 
+          strip.white = T
+      )
+    )
+    mutated_table <- mutate_function(basketball_data)
+    arranged_table <- arrange_function(mutated_table)
+    selected_table <- remove_function(mutated_table)
+    table_2022 <- func_2022_games(selected_table)
+    SUU_table <- team_function(table_2022, "Southern Utah")
+    output$heading <- renderText({
+      "Reading in the original table"
+    })
+    output$mutate <- renderText({
+      "Creating a new column that designates where each game was played. 
+        Also create a column that gives the score differences (team1−team2)."
+    })
+    output$arrange <- renderText({
+      "Sort the dataset by the location where the game was played."
+    })
+    output$select <- renderText({
+      "Remove V6 and V7"
+    })
+    output$fiter <- renderText({
+      "Filter 2022 games"
+    })
+    output$SUU <- renderText({
+      "Filter 2022 SUU games"
+    })
+    output$basketball_data <- renderTable({
+        return(head(basketball_data))
+    })
+    output$mutate_function <- renderTable({
+        return(head(mutated_table))
+    })
+    output$arrange_function <- renderTable({
+        return(head(arranged_table))
+    })
+    output$select_function <- renderTable({
+        return(head(selected_table))
+    })
+    output$filter_function <- renderTable({
+        return(head(table_2022))
+    })
+    output$SUU_function <- renderTable({
+        return(head(SUU_table))
+    })
+}
+
+shinyApp(ui = ui, server = server)
+```

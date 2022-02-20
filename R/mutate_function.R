@@ -16,5 +16,5 @@ mutate_function <- function(basketball_data) {
     mutate(Venue = V4)
   basketball_data <- basketball_data %>% 
     mutate(score_difference = (abs(V3-V5)))
-  View(basketball_data)
+  return(basketball_data)
 }

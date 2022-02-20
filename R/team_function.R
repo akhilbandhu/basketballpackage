@@ -8,6 +8,7 @@
 #' 
 
 team_function <- function(basketball_data, team_name) {
-  basketball_data %>% 
+  basketball_data <- basketball_data %>% 
     filter(grepl(team_name,V2) | grepl(team_name,V4))
+  return(basketball_data)
 }
