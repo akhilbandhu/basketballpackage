@@ -118,7 +118,8 @@ server <- function(input, output, session) {
           x= "Date", 
           y="Score", 
           title = "Away Team Scores"
-        ) 
+        ) +
+        ylim(0,150) 
         # scale_x_date(date_labels = "%Y")
     })
     output$plot2 <- renderPlot({
@@ -129,7 +130,9 @@ server <- function(input, output, session) {
           x= "Date", 
           y="Score", 
           title = "Home Team Scores"
-        ) 
+        ) +
+        ylim(0,150) 
+        # scale_y_continuous(breaks = c(0,50,100,150,200))
         # scale_x_date(date_labels = "%Y")
     })
     output$plot3 <- renderPlot({
