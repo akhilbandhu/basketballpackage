@@ -5,21 +5,32 @@ ui <- fluidPage(
   
   # Read in the basketball dataset
   mainPanel(
-    textOutput("heading"),
-    tableOutput('basketball_data'),
-    plotOutput('plot1'),
-    plotOutput('plot2'),
-    textOutput("mutate"),
-    tableOutput('mutate_function'),
-    plotOutput('plot3'),
-    textOutput("arrange"),
-    tableOutput('arrange_function'),
-    textOutput("select"),
-    tableOutput('select_function'),
-    textOutput("filter"),
-    tableOutput('filter_function'),
-    textOutput("SUU"),
-    tableOutput('SUU_function'),
-    plotOutput('plot4')
+    tabsetPanel(type = "tabs",
+                tabPanel("Reading in Dataset", 
+                         textOutput("heading"),
+                         tableOutput("basketball_data")),
+                tabPanel("Home and Away Team Scores", 
+                         plotOutput('plot1'),
+                         plotOutput('plot2')),
+                tabPanel("Mutate Function",
+                         textOutput("mutate"),
+                         tableOutput('mutate_function')),
+                tabPanel("Score Differences Plot",
+                         plotOutput('plot3')),
+                tabPanel("Arrange Function",
+                         textOutput("arrange"),
+                         tableOutput('arrange_function')),
+                tabPanel("Select Function",
+                         textOutput("select"),
+                         tableOutput('select_function')),
+                tabPanel("Filter Function",
+                         textOutput("filter"),
+                         tableOutput('filter_function')),
+                tabPanel("SUU Games",
+                         textOutput("SUU"),
+                         tableOutput('SUU_function')),
+                tabPanel("Score differences for SUU",
+                         plotOutput('plot4'))
+    )
   )
 )
