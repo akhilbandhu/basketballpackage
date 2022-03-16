@@ -30,7 +30,14 @@ ui <- fluidPage(
                          textOutput("SUU"),
                          tableOutput('SUU_function')),
                 tabPanel("Score differences for SUU",
-                         plotOutput('plot4'))
+                         plotOutput('plot4')),
+                # tabPanel("Team Plot",
+                #          sidebarPanel(
+                #            textInput('team_name',
+                #                      'Enter Team Name')
+                #            ),
+                #          plotOutput('plot5')
+                #          )
     )
   )
 )

@@ -7,11 +7,20 @@ server <- function(input, output, session) {
     )
   )
   
+  # if(is_null(input$team_name)) {
+  #   team <- "Southern Utah"
+  # }else{
+  #   team <- reactive({
+  #     input$team_name
+  #   })
+  # }
+  # 
   mutated_table <- mutate_function(basketball_data)
   arranged_table <- arrange_function(mutated_table)
   selected_table <- remove_function(mutated_table)
   table_2022 <- func_2022_games(selected_table)
   SUU_table <- team_function(table_2022, "Southern Utah")
+  # team_table <- team_function(table_2022, team)
   # names(basketball_data)[1] <- "Date"
   # names(basketball_data)[2] <- "Team 1"
   # names(basketball_data)[3] <- "Score Team 1"
@@ -108,5 +117,18 @@ server <- function(input, output, session) {
         title="Score differences in SUU games"
       )
   })
+  # output$plot5 <- renderPlot({
+  #   ggplot(team_table, 
+  #          aes(
+  #            x=1:nrow(team_table),
+  #            y = score_difference)
+  #   ) + 
+  #     geom_boxplot() + 
+  #     labs(
+  #       x="Game Number",
+  #       y="Score Difference",
+  #       title="Score differences in SUU games"
+  #     )
+  # })
   
 }
